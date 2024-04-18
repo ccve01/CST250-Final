@@ -19,13 +19,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-public class WeatherApp extends Application {
+public class WeatherApp extends Application 
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         launch(args);        
-}
+    }
     
-    public static String parse(String responseBody) {
+    public static String parse(String responseBody) 
+    {
         JSONParser parser = new JSONParser();
         try {
             JSONObject jsonResponse = (JSONObject) parser.parse(responseBody);
@@ -41,25 +44,30 @@ public class WeatherApp extends Application {
             System.out.println("Location entered: " + name);
             
             return "Location: " + name + "\nHumidity: " + humidity + "%\nTempearture: " + temp_f + "°F\nCondition: " + condition +  "\nWind Speed: " + wind_mph;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            
+        } catch (ParseException e) 
+        
+        {
+            e.printStackTrace();   
         }
         return "Failed to parse weather information";
     }
 
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) 
+    {
         TextField locationInput = new TextField();
         Button getWeatherButton = new Button("Get Weather");
         Label weatherInfoLabel = new Label();
 
-        getWeatherButton.setOnAction(event -> {
+        getWeatherButton.setOnAction(event -> 
+        {
             
             String zipCode = locationInput.getText(); //gets zipcode entered by user
             HttpClient client = HttpClient.newHttpClient();
+            
             //System.out.println("Request URL: " + "https://api.weatherapi.com/v1/current.json?key=65ec47db0e5246189fb163942241604&q=" + zipCode); 
+            
             // Print the constructed URL
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.weatherapi.com/v1/current.json?key=65ec47db0e5246189fb163942241604&q=" + zipCode))
@@ -73,15 +81,18 @@ public class WeatherApp extends Application {
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenAccept(responseBody -> {
+                        
                         // Parse the JSON response and update the weatherInfoLabel
                         System.out.println("Response Body: " + responseBody);
                         String weatherInfo = parse(responseBody);
                         Platform.runLater(() -> weatherInfoLabel.setText(weatherInfo));
                     })
-                    .exceptionally(ex -> {
+                    .exceptionally(ex -> 
+                    {
                         // Handle exceptions
                         ex.printStackTrace();
-                        Platform.runLater(() -> {
+                        Platform.runLater(() -> 
+                        {
                             Alert alert = new Alert(AlertType.ERROR);
                             alert.setTitle("Error");
                             alert.setHeaderText("Failed to get weather information");
