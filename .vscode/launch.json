@@ -4,7 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
+
             "type": "java",
             "name": "Current File",
             "request": "launch",
@@ -15,11 +15,6 @@
             "name": "WeatherApp",
             "request": "launch",
             "mainClass": "WeatherApp",
-<<<<<<< HEAD
-=======
-            "projectName": "CST250-Final_44209a5f",
->>>>>>> 51713c76d679af25df32376e2822378427f91a9f
-            "vmArgs": "--module-path \"D:/openjfx-21.0.2_windows-x64_bin-sdk/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
